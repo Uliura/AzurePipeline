@@ -1,8 +1,8 @@
 provider "azurerm" {
-  subscription_id = "${subscription_id}"
-  client_id       = "${client_id}"
-  client_secret   = "${client_secret}"
-  tenant_id       = "${tenant_id}"
+  subscription_id = "${TF_VAR_SUBSCREPTION_ID}"
+  client_id       = "${TF_VAR_CLIENT_ID}"
+  client_secret   = "${TF_VAR_CLIENT_SECRET}"
+  tenant_id       = "${TF_VAR_TENANT_ID}"
   features {}
 }
 
