@@ -3,7 +3,12 @@ trigger:
 
 pool:
   name: My-AKS-Pool
-
+  
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  
 steps:
 
 - task: TerraformTaskV2@2
@@ -28,12 +33,6 @@ steps:
     commandOptions: 'tfplan'
     environmentServiceNameAzureRM: 'AzureDevOpsSP'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-
-steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
