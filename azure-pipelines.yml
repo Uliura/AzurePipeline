@@ -4,12 +4,7 @@ trigger:
   - master
 variables:
   azureSubscription: "Free Subscription"
-
-  stages:
-    - stage: Infa
-
-      steps:
-
+  steps:
       - task: TerraformTaskV2@2
         inputs:
           provider: 'azurerm'
@@ -31,10 +26,6 @@ variables:
           command: 'apply'
           commandOptions: 'tfplan'
           environmentServiceNameAzureRM: 'AzureDevOpsSP'
-
-
-    - stage: DeployApp
-      steps:
 
       - task: AzureWebApp@1
         displayName: Azure Web App Deploy
