@@ -1,4 +1,4 @@
-resource_group_name    = "task4group"
+resource_group_name    = "AzurePipeline"
 location               = "eastus"
 db_name                = "testdb"
 sql_admin_username     = "geka"
