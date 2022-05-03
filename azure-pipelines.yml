@@ -29,7 +29,7 @@ steps:
 - task: TerraformTaskV2@2
   inputs:
     provider: 'azurerm'
-    command: 'apply tfplan '
-    commandOptions: '-auto-approve'
+    command: 'apply'
+    commandOptions: 'tfplan'
     environmentServiceNameAzureRM: 'AzureDevOpsSP'
 
