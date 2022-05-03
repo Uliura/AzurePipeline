@@ -3,7 +3,8 @@ trigger:
 
 pool:
   name: My-AKS-Pool
-
+variables:
+  - group: serviceprincipal
 steps:
 
 - task: TerraformTaskV2@2
