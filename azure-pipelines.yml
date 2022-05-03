@@ -1,31 +1,45 @@
-trigger:
-- master
-
 pool:
   name: My-AKS-Pool
+trigger:
+  - master
+variables:
+  azureSubscription: "Free Subscription"
 
-steps:
+  stages:
+    - stage: Infa
 
-- task: TerraformTaskV2@2
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    backendServiceArm: 'AzureDevOpsSP'
-    backendAzureRmResourceGroupName: 'AzureDevOps'
-    backendAzureRmStorageAccountName: 'storadgeforazuredevops'
-    backendAzureRmContainerName: 'terrablobs'
-    backendAzureRmKey: 'terraform.tfstate'
-- task: TerraformTaskV2@2
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    commandOptions: '-out=tfplan'
-    environmentServiceNameAzureRM: 'AzureDevOpsSP'
-- task: TerraformTaskV2@2
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    commandOptions: 'tfplan'
-    environmentServiceNameAzureRM: 'AzureDevOpsSP'
+      steps:
+
+      - task: TerraformTaskV2@2
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'AzureDevOpsSP'
+          backendAzureRmResourceGroupName: 'AzureDevOps'
+          backendAzureRmStorageAccountName: 'storadgeforazuredevops'
+          backendAzureRmContainerName: 'terrablobs'
+          backendAzureRmKey: 'terraform.tfstate'
+      - task: TerraformTaskV2@2
+        inputs:
+          provider: 'azurerm'
+          command: 'plan'
+          commandOptions: '-out=tfplan'
+          environmentServiceNameAzureRM: 'AzureDevOpsSP'
+      - task: TerraformTaskV2@2
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          commandOptions: 'tfplan'
+          environmentServiceNameAzureRM: 'AzureDevOpsSP'
 
 
+    - stage: DeployApp
+      steps:
+
+      - task: AzureWebApp@1
+        displayName: Azure Web App Deploy
+        inputs:
+          azureSubscription: $(azureSubscription)
+          appName: samplewebapp
+          package: $(System.DefaultWorkingDirectory)*.zip
+          deploymentMethod: zipDeploy
