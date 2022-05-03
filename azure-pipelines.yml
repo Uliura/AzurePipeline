@@ -8,7 +8,7 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-       - task: TerraformInit
+       - task: TerraformInit@2
          inputs:
             provider: 'azurerm'
             command: 'init'
@@ -17,13 +17,13 @@ stages:
             backendAzureRmStorageAccountName: 'storadgeforazuredevops'
             backendAzureRmContainerName: 'terrablobs'
             backendAzureRmKey: 'terraform.tfstate'
-       - task: TerraformPlan
+       - task: TerraformPlan@2
          inputs:
            provider: 'azurerm'
            command: 'plan'
            commandOptions: '-out=tfplan'
            environmentServiceNameAzureRM: 'AzureDevOpsSP'
-       - task: TerraformApply
+       - task: TerraformApply@2
          inputs:
             provider: 'azurerm'
             command: 'apply'
