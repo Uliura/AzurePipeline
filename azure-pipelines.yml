@@ -4,7 +4,7 @@ trigger:
 pool:
   name: My-AKS-Pool
 variables:
-  - group: serviceprincipal
+  - group: Terraform-Variable-Group
 steps:
 
 - task: TerraformTaskV2@2
