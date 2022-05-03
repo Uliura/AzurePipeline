@@ -6,7 +6,7 @@
 # }
 
 terraform {
-   backend "local" {}
+   backend "azurerm" {}
 }
 
 resource "azurerm_resource_group" "rg" {
