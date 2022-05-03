@@ -33,3 +33,9 @@ steps:
     commandOptions: 'tfplan'
     environmentServiceNameAzureRM: 'AzureDevOpsSP'
 
+- task: TerraformTaskV2@2
+  inputs:
+    provider: 'azurerm'
+    command: 'destroy'
+    commandOptions: 'tfplan'
+    environmentServiceNameAzureRM: 'AzureDevOpsSP'
