@@ -1,18 +1,15 @@
-
 stages:
 
-- stage: terraform
-  displayName: Build infrastructure
-  jobs:
-  - job: Terraform_Plan
-    displayName: Terraform Init, Plan & Apply
-    pool:
-      name: My-AKS-Pool
-
+  - stage: terraform
+    displayName: Build infrastructure
+    jobs:
+    - job: Terraform_Plan
+      displayName: Terraform Init, Plan & Apply
+      pool:
+        name: My-AKS-Pool
       steps:
-
-        - task: TerraformInit
-          inputs:
+       - task: TerraformInit
+         inputs:
             provider: 'azurerm'
             command: 'init'
             backendServiceArm: 'AzureDevOpsSP'
@@ -20,17 +17,17 @@ stages:
             backendAzureRmStorageAccountName: 'storadgeforazuredevops'
             backendAzureRmContainerName: 'terrablobs'
             backendAzureRmKey: 'terraform.tfstate'
-        - task: TerraformPlan
-          inputs:
-            provider: 'azurerm'
-            command: 'plan'
-            commandOptions: '-out=tfplan'
-            environmentServiceNameAzureRM: 'AzureDevOpsSP'
-        - task: TerraformApply
-          inputs:
+       - task: TerraformPlan
+         inputs:
+           provider: 'azurerm'
+           command: 'plan'
+           commandOptions: '-out=tfplan'
+           environmentServiceNameAzureRM: 'AzureDevOpsSP'
+       - task: TerraformApply
+         inputs:
             provider: 'azurerm'
             command: 'apply'
             commandOptions: 'tfplan'
             environmentServiceNameAzureRM: 'AzureDevOpsSP'
-
+  
       
