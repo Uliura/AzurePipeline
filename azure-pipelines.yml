@@ -63,7 +63,7 @@ stages:
           displayName: 'Build solution'
           inputs:
             solution: '**\*.sln'
-            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
+            msbuildArgs: '/p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl="$(System.DefaultWorkingDirectory)\\WebAppContent"'
             platform: 'any cpu'
             configuration: 'release'
           
@@ -83,8 +83,9 @@ stages:
         - task: PublishBuildArtifacts@1
           displayName: 'Publish Artifact'
           inputs:
-            PathtoPublish: '$(build.artifactstagingdirectory)'
+            PathtoPublish: '$(System.DefaultWorkingDirectory)\\WebAppContent'
             ArtifactName: 'drop.zip'
+            publishLocation: 'Container'
           
   - stage: DeployApp
     displayName: Deploy app
@@ -100,7 +101,7 @@ stages:
             azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
             WebAppName: 'cicdtestwinapp'
-            Package: '$(build.artifactstagingdirectory)\**\*.zip'
+            Package: '$(System.DefaultWorkingDirectory)/**/*.zip'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
             UseWebDeploy: true
