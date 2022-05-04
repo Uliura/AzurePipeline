@@ -42,12 +42,6 @@ stages:
          - msbuild
          - visualstudio
           
-          #Your build pipeline references an undefined variable named ‘Parameters.solution’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-          #Your build pipeline references an undefined variable named ‘Parameters.solution’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-          #Your build pipeline references the ‘BuildPlatform’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
-          #Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
-          #Your build pipeline references an undefined variable named ‘Parameters.ArtifactName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-          
       steps:
         - task: NuGetToolInstaller@1
           displayName: 'Use NuGet 5.8.0'
@@ -95,6 +89,10 @@ stages:
       pool:
         vmImage: 'windows-2019' 
       steps:
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Build.ArtifactStagingDirectory)' 
+            artifactName: 'drop'
         - task: AzureRmWebAppDeployment@3
           displayName: 'Deploy Azure App Service'
           inputs:
