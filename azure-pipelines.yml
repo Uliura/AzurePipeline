@@ -30,10 +30,10 @@ stages:
             commandOptions: 'tfplan'
             environmentServiceNameAzureRM: 'AzureDevOpsSP'
             
-  - stage: build app
+  - stage: BuildApp
     displayName: Build webapp
     jobs:
-    - job: build app
+    - job: buildapp
       displayName: build app
       pool:
         name: Azure Pipelines
@@ -85,7 +85,7 @@ stages:
             PathtoPublish: '$(build.artifactstagingdirectory)'
             ArtifactName: '$(Parameters.ArtifactName)'
           
-  - stage: Deploy app
+  - stage: DeployApp
     displayName: Deploy app
     jobs:
     - job: Deployapp
