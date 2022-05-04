@@ -75,10 +75,7 @@ stages:
             flattenFolders: true
           
         - task: PublishBuildArtifacts@1
-          displayName: Publish Artifact
-          inputs:
-            PathtoPublish: $(build.artifactstagingdirectory)
-            ArtifactName: 'drop'
+
 
   - stage: DeployApp
     displayName: Deploy app
