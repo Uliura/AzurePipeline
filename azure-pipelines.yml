@@ -79,7 +79,7 @@ stages:
           inputs:
             PathtoPublish: $(build.artifactstagingdirectory)
             ArtifactName: 'drop'
-            TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+            TargetPath: '$(Build.BuildNumber)'
           
   - stage: DeployApp
     displayName: Deploy app
@@ -89,17 +89,13 @@ stages:
       pool:
         vmImage: 'windows-2019' 
       steps:
-        - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(Build.ArtifactStagingDirectory)' 
-            artifactName: 'drop'
         - task: AzureRmWebAppDeployment@3
           displayName: 'Deploy Azure App Service'
           inputs:
             azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
             WebAppName: 'cicdtestwinapp'
-            Package: '$(Build.ArtifactStagingDirectory)\**\drop'
+            Package: '$(Build.ArtifactStagingDirectory)/**/drop'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
             UseWebDeploy: true
