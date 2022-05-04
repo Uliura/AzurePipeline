@@ -91,7 +91,7 @@ stages:
             azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
             WebAppName: 'cicdtestwinapp'
-            Package: '$(System.DefaultWorkingDirectory)/**/drop'
+            Package: '$(build.artifactstagingdirectory)/**/drop'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
             enableXmlVariableSubstitution: true
