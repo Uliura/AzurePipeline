@@ -84,7 +84,7 @@ stages:
           displayName: 'Publish Artifact'
           inputs:
             PathtoPublish: '$(build.artifactstagingdirectory)'
-            ArtifactName: 'drop'
+            ArtifactName: 'drop.zip'
           
   - stage: DeployApp
     displayName: Deploy app
@@ -100,7 +100,7 @@ stages:
             azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
             WebAppName: 'cicdtestwinapp'
-            Package: '$(build.artifactstagingdirectory)\**\*drop'
+            Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
             UseWebDeploy: true
