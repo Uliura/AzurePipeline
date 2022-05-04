@@ -97,7 +97,7 @@ stages:
         - task: AzureRmWebAppDeployment@3
           displayName: 'Deploy Azure App Service'
           inputs:
-            azureSubscription: 'AzureDevOpsSP'
+            azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
             WebAppName: 'cicdtestwinapp'
             Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
