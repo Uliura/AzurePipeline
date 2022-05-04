@@ -84,7 +84,7 @@ stages:
           displayName: 'Publish Artifact'
           inputs:
             PathtoPublish: '$(build.artifactstagingdirectory)'
-            ArtifactName: '$(Parameters.ArtifactName)'
+            ArtifactName: 'drop'
           
   - stage: DeployApp
     displayName: Deploy app
