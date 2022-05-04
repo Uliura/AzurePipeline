@@ -75,6 +75,10 @@ stages:
             flattenFolders: true
           
         - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
 
 
   - stage: DeployApp
@@ -91,7 +95,7 @@ stages:
             azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
             WebAppName: 'cicdtestwinapp'
-            Package: '$(build.artifactstagingdirectory)/**/*.zip'
+            Package: '$(build.artifactstagingdirectory)/**/**/*.zip'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
             enableXmlVariableSubstitution: true
