@@ -86,11 +86,6 @@ stages:
             PathtoPublish: $(build.artifactstagingdirectory)
             ArtifactName: 'drop'
             TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
-            zipAfterPublish: True
-        - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(Build.ArtifactStagingDirectory)' 
-            artifactName: 'drop'
           
   - stage: DeployApp
     displayName: Deploy app
