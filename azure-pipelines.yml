@@ -98,7 +98,7 @@ stages:
             Package: '$(Build.ArtifactStagingDirectory)/**/drop'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
-            UseWebDeploy: true
+            UseWebDeploy: false
             RenameFilesFlag: true
             enableXmlVariableSubstitution: true
       
