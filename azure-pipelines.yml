@@ -79,8 +79,7 @@ stages:
           inputs:
             PathtoPublish: $(build.artifactstagingdirectory)
             ArtifactName: 'drop'
-            TargetPath: '$(Build.BuildNumber)'
-          
+
   - stage: DeployApp
     displayName: Deploy app
     jobs:
