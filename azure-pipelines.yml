@@ -37,6 +37,7 @@ stages:
       displayName: build app
       pool:
         name: Azure Pipelines
+        vmImage: 'windows-2019' 
         demands:
          - msbuild
          - visualstudio
