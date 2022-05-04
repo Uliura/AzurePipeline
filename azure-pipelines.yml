@@ -96,8 +96,8 @@ stages:
         - task: AzureRmWebAppDeployment@3
           displayName: 'Deploy Azure App Service'
           inputs:
-             azureSubscription: 'testdevopsgekaapp - Azure'
-             WebAppName: testdevopsgekaapp
+             azureSubscription: 'Free Subscription'
+             WebAppName: cicdtestwinapp
              Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
              WebAppUri: webAppUrl
              TakeAppOfflineFlag: true
