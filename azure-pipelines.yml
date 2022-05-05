@@ -58,7 +58,7 @@ stages:
           displayName: 'Build solution'
           inputs:
             solution: '**\*.sln'
-            msbuildArgs: '/p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
+            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
             platform: 'any cpu'
             configuration: 'release'
           
