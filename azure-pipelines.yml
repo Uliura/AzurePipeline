@@ -76,7 +76,7 @@ stages:
     - job: Deployapp
       displayName: Deploy app
       pool:
-        name: My-AKS-Pool 
+        vmImage: 'windows-2019'
       steps:
         - task: DownloadBuildArtifacts@0
           inputs:
