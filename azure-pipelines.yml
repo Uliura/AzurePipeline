@@ -89,6 +89,4 @@ stages:
               appType: 'webApp'
               appName: cicdtestwinapp
               package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-              deploymentMethod: 'auto''
-
-      
+              deploymentMethod: 'auto'
