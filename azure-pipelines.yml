@@ -87,7 +87,7 @@ stages:
           inputs:
             azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
-            WebAppName: 'cicdtestwinapp'
+            WebAppName: cicdtestwinapp
             Package: '$(System.DefaultWorkingDirectory)/**/*.zip'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
