@@ -83,10 +83,14 @@ stages:
             artifactName: drop
             downloadPath: '$(System.DefaultWorkingDirectory)'
     
-        - task: AzureWebApp@1
+        - task: AzureRmWebAppDeployment@3
+          displayName: 'Deploy Azure App Service'
           inputs:
-            azureSubscription: 'AzureDevOpsSP'
-            appType: 'webApp'
-            appName: 'cicdtestwinapp'
-            package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-            deploymentMethod: 'auto'
+            azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
+            appType: 'app'
+            WebAppName: 'cicdtestwinapp'
+            Package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+            WebAppUri: 'webAppUrl'
+            TakeAppOfflineFlag: true
+            UseWebDeploy: true
+            enableXmlVariableSubstitution: true
