@@ -85,8 +85,8 @@ stages:
     
         - task: AzureWebApp@1
           inputs:
-              azureSubscription: 'AzureDevOpsSP'
-              appType: 'webApp'
-              appName: cicdtestwinapp
-              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-              deploymentMethod: 'auto'
+            azureSubscription: 'AzureDevOpsSP'
+            appType: 'webApp'
+            appName: 'cicdtestwinapp'
+            package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+            deploymentMethod: 'auto'
