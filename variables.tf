@@ -48,6 +48,6 @@ variable "current_stack" {
   type        = string
 }
 
-variable "dotnet_version " {
+variable "dotnet_version" {
   type        = string
 }
