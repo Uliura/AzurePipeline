@@ -36,11 +36,8 @@ stages:
     - job: buildapp
       displayName: build app
       pool:
-        name: Azure Pipelines
-        vmImage: 'windows-2019' 
-        demands:
-         - msbuild
-         - visualstudio
+        name: My-AKS-Pool
+
           
       steps:
         - task: NuGetToolInstaller@1
@@ -75,7 +72,7 @@ stages:
     - job: Deployapp
       displayName: Deploy app
       pool:
-        vmImage: 'windows-2019' 
+        name: My-AKS-Pool 
       steps:
         - task: DownloadBuildArtifacts@0
           inputs:
