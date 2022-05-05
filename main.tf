@@ -31,7 +31,6 @@ module "dotNetApp" {
   connection_name           = var.connection_name
   connection_type           = var.connection_type
   connection_string_value   = module.sql-database.connection_string
-  current_stack             = var.current_stack
   dotnet_version            = var.dotnet_version
 depends_on = [
   module.sql-database
