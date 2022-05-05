@@ -42,12 +42,6 @@ stages:
          - msbuild
          - visualstudio
           
-          #Your build pipeline references an undefined variable named ‘Parameters.solution’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-          #Your build pipeline references an undefined variable named ‘Parameters.solution’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-          #Your build pipeline references the ‘BuildPlatform’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
-          #Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
-          #Your build pipeline references an undefined variable named ‘Parameters.ArtifactName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-          
       steps:
         - task: NuGetToolInstaller@1
           displayName: 'Use NuGet 5.8.0'
@@ -63,7 +57,7 @@ stages:
           displayName: 'Build solution'
           inputs:
             solution: '**\*.sln'
-            msbuildArgs: /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"
+            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
             platform: 'any cpu'
             configuration: 'release'
           
@@ -81,17 +75,12 @@ stages:
             flattenFolders: true
           
         - task: PublishBuildArtifacts@1
-          displayName: Publish Artifact
           inputs:
-            PathtoPublish: $(build.artifactstagingdirectory)
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: 'drop'
-            TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
-            zipAfterPublish: True
-        - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(Build.ArtifactStagingDirectory)' 
-            artifactName: 'drop'
-          
+            publishLocation: 'Container'
+
+
   - stage: DeployApp
     displayName: Deploy app
     jobs:
@@ -100,16 +89,19 @@ stages:
       pool:
         vmImage: 'windows-2019' 
       steps:
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            artifactName: drop
+            downloadPath: '$(System.DefaultWorkingDirectory)'
+    
         - task: AzureRmWebAppDeployment@3
           displayName: 'Deploy Azure App Service'
           inputs:
             azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
             appType: 'app'
             WebAppName: 'cicdtestwinapp'
-            Package: '$(System.DefaultWorkingDirectory)\**\*.zip'
+            Package: '$(System.DefaultWorkingDirectory)/**/*.zip'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
-            UseWebDeploy: true
-            RenameFilesFlag: true
             enableXmlVariableSubstitution: true
       
