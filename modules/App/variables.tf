@@ -35,3 +35,11 @@ variable "connection_type" {
 variable "connection_string_value" {
   type        = string
 }
+
+variable "current_stack" {
+  type        = string
+}
+
+variable "dotnet_version " {
+  type        = string
+}
