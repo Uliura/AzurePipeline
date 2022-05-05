@@ -91,5 +91,6 @@ stages:
             Package: '$(System.DefaultWorkingDirectory)/**/*.zip'
             WebAppUri: 'webAppUrl'
             TakeAppOfflineFlag: true
+            UseWebDeploy: true
             enableXmlVariableSubstitution: true
       
