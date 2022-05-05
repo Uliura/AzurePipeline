@@ -6,7 +6,7 @@ resource "azurerm_service_plan" "app_plan" {
   os_type             = var.app_plan_os_type
 }
 
-resource "azurerm_windows_web_app" "webapp" {
+resource "azurerm_linux_web_app" "webapp" {
   name                = var.app_service_name
   resource_group_name = var.resource_group_name
   location            = var.location
