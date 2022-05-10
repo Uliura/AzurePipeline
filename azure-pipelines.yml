@@ -9,27 +9,7 @@ stages:
       pool:
         name: My-AKS-Pool
       steps:
-       - task: TerraformTaskV2@2
-         inputs:
-            provider: 'azurerm'
-            command: 'init'
-            backendServiceArm: 'AzureDevOpsSP'
-            backendAzureRmResourceGroupName: 'AzureDevOps'
-            backendAzureRmStorageAccountName: 'storadgeforazuredevops'
-            backendAzureRmContainerName: 'terrablobs'
-            backendAzureRmKey: 'terraform.tfstate'
-       - task: TerraformTaskV2@2
-         inputs:
-           provider: 'azurerm'
-           command: 'plan'
-           commandOptions: '-out=tfplan'
-           environmentServiceNameAzureRM: 'AzureDevOpsSP'
-       - task: TerraformTaskV2@2
-         inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            commandOptions: 'tfplan'
-            environmentServiceNameAzureRM: 'AzureDevOpsSP'
+        - template: terraform.yml
             
   - stage: BuildApp
     displayName: Build webapp
@@ -44,31 +24,7 @@ stages:
          - visualstudio
           
       steps:
-        - task: NuGetToolInstaller@1
-          displayName: 'Use NuGet 5.8.0'
-          inputs:
-            versionSpec: 5.8.0
-          
-        - task: NuGetCommand@2
-          displayName: 'NuGet restore'
-          inputs:
-            restoreSolution: '**\*.sln'
-          
-        - task: VSBuild@1
-          displayName: 'Build solution'
-          inputs:
-            solution: '**\*.sln'
-            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
-            platform: 'any cpu'
-            configuration: 'release'
-          
-         
-        - task: PublishBuildArtifacts@1
-          inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-            ArtifactName: 'drop'
-            publishLocation: 'Container'
-
+        - template: buildapp.yml
 
   - stage: DeployApp
     displayName: Deploy app
@@ -78,19 +34,4 @@ stages:
       pool:
         vmImage: 'windows-2019'
       steps:
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            artifactName: drop
-            downloadPath: '$(System.DefaultWorkingDirectory)'
-    
-        - task: AzureRmWebAppDeployment@3
-          displayName: 'Deploy Azure App Service'
-          inputs:
-            azureSubscription: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
-            appType: 'app'
-            WebAppName: 'cicdtestwinapp'
-            Package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-            WebAppUri: 'webAppUrl'
-            TakeAppOfflineFlag: true
-            UseWebDeploy: true
-            enableXmlVariableSubstitution: true
+        - template: deploy.yml

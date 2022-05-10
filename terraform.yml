@@ -1,0 +1,22 @@
+steps:
+  - task: TerraformTaskV2@2
+    inputs:
+      provider: "azurerm"
+      command: "init"
+      backendServiceArm: "AzureDevOpsSP"
+      backendAzureRmResourceGroupName: "AzureDevOps"
+      backendAzureRmStorageAccountName: "storadgeforazuredevops"
+      backendAzureRmContainerName: "terrablobs"
+      backendAzureRmKey: "terraform.tfstate"
+  - task: TerraformTaskV2@2
+    inputs:
+      provider: "azurerm"
+      command: "plan"
+      commandOptions: "-out=tfplan"
+      environmentServiceNameAzureRM: "AzureDevOpsSP"
+  - task: TerraformTaskV2@2
+    inputs:
+      provider: "azurerm"
+      command: "apply"
+      commandOptions: "tfplan"
+      environmentServiceNameAzureRM: "AzureDevOpsSP"
