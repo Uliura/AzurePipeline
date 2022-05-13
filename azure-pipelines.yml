@@ -9,7 +9,7 @@ stages:
       pool:
         name: My-AKS-Pool
       variables:
-      - group: 
+      - group: Terraform-Variable-Group
       steps:
         - template: terraform.yml
             
