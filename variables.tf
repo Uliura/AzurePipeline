@@ -32,7 +32,7 @@ variable "APP_PLAN_SKU_NAME" {
   type        = string
     validation {
     condition     = contains(["Free F1","B1"], var.APP_PLAN_SKU_NAME)
-    error_message = "The Plan value can be Free F1 or B1 only"
+    error_message = "The Plan value can be Free F1 or B1 only."
   }
 }
 
@@ -40,7 +40,7 @@ variable "APP_PLAN_OS_TYPE" {
   type        = string
     validation {
     condition     = contains(["Linux", "Windows"], var.APP_PLAN_OS_TYPE)
-    error_message = "The OS type must be Linux or Windows"
+    error_message = "The OS type must be Linux or Windows."
   }
 }
 
