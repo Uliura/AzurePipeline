@@ -12,7 +12,7 @@ steps:
     inputs:
       provider: "azurerm"
       command: "plan"
-      commandOptions: "-out=tfplan"
+      commandOptions: '-out=tfplan -input=false -var "SQL_PASSWORD=$(TF_VAR_SQL_PASSWORD)"'
       environmentServiceNameAzureRM: 'Free Subscription(664b98cb-cc33-4ac5-a541-f8cf0203bb97)'
   - task: TerraformTaskV2@2
     inputs:
