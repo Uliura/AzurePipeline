@@ -12,6 +12,8 @@ stages:
       - script: >-
           docker run \
             -e RUN_LOCAL=true \
+            -e VALIDATE_CSHARP=false \
+            -e VALIDATE_CPP=false \
             -v $(System.DefaultWorkingDirectory):/tmp/lint \
             github/super-linter
         displayName: 'Run GitHub Super-Linter' 
