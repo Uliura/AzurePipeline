@@ -1,3 +1,4 @@
+---
 steps:
   - task: TerraformTaskV2@2
     inputs:
