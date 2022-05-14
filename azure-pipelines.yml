@@ -14,6 +14,8 @@ stages:
             -e RUN_LOCAL=true \
             -e VALIDATE_CSHARP=false \
             -e VALIDATE_CPP=false \
+            -e VALIDATE_CSS=false \
+            -e VALIDATE_HTML=false \
             -v $(System.DefaultWorkingDirectory):/tmp/lint \
             github/super-linter
         displayName: 'Run GitHub Super-Linter' 
