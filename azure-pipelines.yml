@@ -1,5 +1,20 @@
 trigger: none
 stages:
+  - stage: Linter
+    displayName: Check the code
+    jobs:
+    - job: lint
+      pool:
+        name: My-AKS-Pool
+      steps:
+      - script: docker pull github/super-linter:latest
+        displayName: Pull GitHub Super-Linter image
+      - script: >-
+          docker run \
+            -e RUN_LOCAL=true \
+            -v $(System.DefaultWorkingDirectory):/tmp/lint \
+            github/super-linter
+        displayName: 'Run GitHub Super-Linter' 
 
   - stage: terraform
     displayName: Build infrastructure
