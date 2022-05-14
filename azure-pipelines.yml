@@ -5,7 +5,7 @@ stages:
     jobs:
     - job: lint
       pool:
-        name: My-AKS-Pool
+        vmImage: 'ubuntu-latest'
       steps:
       - script: docker pull github/super-linter:latest
         displayName: Pull GitHub Super-Linter image
