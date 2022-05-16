@@ -7,7 +7,7 @@ stages:
       - job: Terraform_Plan
         displayName: Terraform Init, Plan & Apply
         pool:
-          name: My-AKS-Pool
+          name: pipeline-agent
         variables:
         - group: Terraform-Variable-Group
         steps:
@@ -19,11 +19,7 @@ stages:
       - job: buildapp
         displayName: build app
         pool:
-          name: Azure Pipelines
-          vmImage: 'windows-2019' 
-          demands:
-          - msbuild
-          - visualstudio
+          name: pipeline-agent
             
         steps:
           - template: buildapp.yml
@@ -34,6 +30,6 @@ stages:
       - job: Deployapp
         displayName: Deploy app
         pool:
-          vmImage: 'windows-2019'
+          name: pipeline-agent
         steps:
           - template: deploy.yml
