@@ -7,7 +7,7 @@ steps:
       backendServiceArm: 'AzureSC'
       backendAzureRmResourceGroupName: "AzureDevOps"
       backendAzureRmStorageAccountName: "storadgeforazuredevops"
-      backendAzureRmContainerName: "terrablobs"
+      backendAzureRmContainerName: "tfstate"
       backendAzureRmKey: "terraform.tfstate"
   - task: TerraformTaskV2@2
     inputs:
