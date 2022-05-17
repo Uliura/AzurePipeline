@@ -19,7 +19,11 @@ stages:
       - job: buildapp
         displayName: build app
         pool:
-          name: pipeline-agent
+          name: Azure Pipelines
+          vmImage: 'windows-2019' 
+          demands:
+          - msbuild
+          - visualstudio
             
         steps:
           - template: buildapp.yml
